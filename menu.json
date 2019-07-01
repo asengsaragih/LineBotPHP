@@ -1,0 +1,31 @@
+{
+  "type": "template",
+  "altText": "this is a buttons template",
+  "template": {
+    "type": "buttons",
+    "actions": [
+      {
+        "type": "message",
+        "label": "Jadwal Kuliah",
+        "text": "/kuliah"
+      },
+      {
+        "type": "message",
+        "label": "Info Kuliah",
+        "text": "/info"
+      },
+      {
+        "type": "message",
+        "label": "Wali Dosen",
+        "text": "/waldos"
+      },
+      {
+        "type": "message",
+        "label": "Tentang BOT",
+        "text": "/tentang"
+      }
+    ],
+    "title": "Daftar Menu",
+    "text": "D3IF41-03"
+  }
+}

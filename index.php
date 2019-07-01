@@ -52,13 +52,33 @@ $app->post('/webhook', function ($request, $response) use ($bot, $pass_signature
             return $response->withStatus(400, 'Invalid signature');
         }
     }
+ 
+    // kode aplikasi nanti disini
+    $data = json_decode($body, true);
+    if(is_array($data['events'])){
+        foreach ($data['events'] as $event)
+        {
+            $userMessage = $event['message']['text'];
 
-    //awal kodingan
-
-    //akhir kodingan
+            if(strtolower($userMessage) == '/menu') {
+                $flexTemplate = file_get_contents("menu.json"); // template flex message
+                $result = $httpClient->post(LINEBot::DEFAULT_ENDPOINT_BASE . '/v2/bot/message/reply', 
+                    [
+                        'replyToken' => $event['replyToken'],
+                        'messages'   => [
+                                    [
+                                        'type'     => 'flex',
+                                        'altText'  => 'Test Flex Message',
+                                        'contents' => json_decode($flexTemplate)
+                                    ]
+                                ],
+                ]);
+                return $response->withJson($result->getJSONDecodedBody(), $result->getHTTPStatus());
+            }  
+        } 
+    }
  
 });
-
 //push message atau broadcast message
 $app->get('/pushmessage', function($req, $res) use ($bot)
 {
