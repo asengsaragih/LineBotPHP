@@ -91,6 +91,18 @@ $app->get('/pushmessage', function($req, $res) use ($bot)
     $bot->pushMessage($userId, $stickerMessageBuilder);
     return $res->withJson($result->getJSONDecodedBody(), $result->getHTTPStatus());
 });
+
+$app->get('/multicast', function($req, $res) use ($bot)
+{
+    // list of users
+    $userList = ['C0964f2cf09b447618a304da9c2219993'];
+ 
+    // send multicast message to user
+    $textMessageBuilder = new TextMessageBuilder('Halo, ini pesan multicast');
+    $result = $bot->multicast($userList, $textMessageBuilder);
+   
+    return $res->withJson($result->getJSONDecodedBody(), $result->getHTTPStatus());
+});
 $app->run();
 
 ?>
