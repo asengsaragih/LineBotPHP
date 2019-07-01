@@ -52,72 +52,10 @@ $app->post('/webhook', function ($request, $response) use ($bot, $pass_signature
             return $response->withStatus(400, 'Invalid signature');
         }
     }
- 
-    $data = json_decode($body, true);
-    if(is_array($data['events'])){
-        foreach ($data['events'] as $event)
-        {
-            if ($event['type'] == 'message')
-            {
-                // $userMessage = $event['message']['text'];
-                // if($event['message']['type'] == 'text')
-                // {
-                //     // send same message as reply to user
-                //     $result = $bot->replyText($event['replyToken'], $event['message']['text']);
-     
-                //     // or we can use replyMessage() instead to send reply message
-                //     // $textMessageBuilder = new TextMessageBuilder($event['message']['text']);
-                //     // $result = $bot->replyMessage($event['replyToken'], $textMessageBuilder);
-     
-                //     return $response->withJson($result->getJSONDecodedBody(), $result->getHTTPStatus());
-                // }
-                if($event['source']['type'] == 'group' or $event['source']['type'] == 'room'){
-                //message from group / room    
-                    if($event['source']['userId']){
-                        $userId     = $event['source']['userId'];
-                        $getprofile = $bot->getProfile($userId);
-                        $profile    = $getprofile->getJSONDecodedBody();
-                        $greetings  = new TextMessageBuilder("Halo, ".$profile['displayName']);
-                     
-                        $result = $bot->replyMessage($event['replyToken'], $greetings);
-                        return $res->withJson($result->getJSONDecodedBody(), $result->getHTTPStatus());
-                     
-                    } else {
-                        // send same message as reply to user
-                        $result = $bot->replyText($event['replyToken'], $event['message']['text']);
-                        return $res->withJson($result->getJSONDecodedBody(), $result->getHTTPStatus());
-                    }
-                } else {
-                    if ($event['message']['type'] == 'text') {
-                        if (strtolower($event['message']['text']) == 'user id') {
- 
-                            $result = $bot->replyText($event['replyToken'], $event['source']['userId']);
- 
-                        } elseif (strtolower($event['message']['text']) == 'flex message') {
- 
-                            $flexTemplate = file_get_contents("flexbox.json"); // template flex message
-                            $result = $httpClient->post(LINEBot::DEFAULT_ENDPOINT_BASE . '/v2/bot/message/reply', [
-                                'replyToken' => $event['replyToken'],
-                                'messages'   => [
-                                    [
-                                        'type'     => 'flex',
-                                        'altText'  => 'Test Flex Message',
-                                        'contents' => json_decode($flexTemplate)
-                                    ]
-                                ],
-                            ]);
- 
-                        } else {
-                            // send same message as reply to user
-                            $result = $bot->replyText($event['replyToken'], $event['message']['text']);
-                        }
- 
-                        return $response->withJson($result->getJSONDecodedBody(), $result->getHTTPStatus());
-                    }
-                }
-            }
-        } 
-    }
+
+    //awal kodingan
+
+    //akhir kodingan
  
 });
 
@@ -139,12 +77,7 @@ $app->get('/pushmessage', function($req, $res) use ($bot)
 $app->get('/multicast', function($req, $res) use ($bot)
 {
     // list of users
-    $userList = [
-        'U206d25c2ea6bd87c17655609xxxxxxxx',
-        'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
-        'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
-        'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
-        'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'];
+    $userList = ['C0964f2cf09b447618a304da9c2219993'];
  
     // send multicast message to user
     $textMessageBuilder = new TextMessageBuilder('Halo, ini pesan multicast');
