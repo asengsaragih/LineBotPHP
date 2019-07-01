@@ -59,6 +59,7 @@ $app->post('/webhook', function ($request, $response) use ($bot, $pass_signature
         {
             if ($event['type'] == 'message')
             {
+                // $userMessage = $event['message']['text'];
                 if($event['message']['type'] == 'text')
                 {
                     // send same message as reply to user
@@ -75,7 +76,21 @@ $app->post('/webhook', function ($request, $response) use ($bot, $pass_signature
     }
  
 });
- 
+
+//push message atau broadcast message
+$app->get('/pushmessage', function($req, $res) use ($bot)
+{
+    // send push message to user
+    $userId = 'Udb1551f3893cade017d14653f2b186c3';
+
+    $textMessageBuilder = new TextMessageBuilder('Halo, ini pesan push');
+    $result = $bot->pushMessage($userId, $textMessageBuilder);
+    
+    //yang dibawah untuk push stiker
+    // $stickerMessageBuilder = new StickerMessageBuilder(1, 106);
+    // $bot->pushMessage($userId, $stickerMessageBuilder);
+    return $res->withJson($result->getJSONDecodedBody(), $result->getHTTPStatus());
+});
 $app->run();
 
 ?>
