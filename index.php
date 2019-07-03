@@ -118,7 +118,11 @@ $app->post('/webhook', function ($request, $response) use ($bot, $pass_signature
                     foreach ($dataInfo as $d) { 
                         $tanggal = $d['tanggal_pengumpulan'];
                         $keterangan = $d['keterangan_tugas'];
-                        $text_gabungan .= "{$tanggal}"." || "."{$keterangan}"."\n\n";
+                        $tahun = substr($tanggal,0,4);
+                        $bulan = substr($tanggal,-4,-2);
+                        $hari = substr($tanggal,6);  
+                        $gabungan_tanggal = $hari."-".$bulan."-".$tahun;
+                        $text_gabungan .= "{$gabungan_tanggal}"." || "."{$keterangan}"."\n\n";
                     }
                     if ($text_gabungan == null) {
                         $text_gabungan = "Kosong";
