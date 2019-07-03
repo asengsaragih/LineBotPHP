@@ -88,13 +88,13 @@ $app->post('/webhook', function ($request, $response) use ($bot, $pass_signature
                         $jadwal_Matkul = "Proyek Tingkat 2 \nD4 \n08.30 - 12.30\n\n KWU \nA3 \n13.10 - 15.30";
                     } elseif ($nama_hari == "Tuesday") {
                         # code...
-                        $jadwal_Matkul = "Multer \nC4 \n09.30 - 11.30\n\n Kalkulus \nB3 \n13.10 - 17.30";
+                        $jadwal_Matkul = "Multer \nC4 \n09.30 - 11.30\n\nKalkulus \nB3 \n13.10 - 17.30";
                     } elseif ($nama_hari == "Wednesday") {
                         # code...
-                        $jadwal_Matkul = "Bhs Indonesia \nA5 \n07.30 - 09.30\n\n Progweb \nB3 \n13.10 - 17.30";
+                        $jadwal_Matkul = "Bhs Indonesia \nA5 \n07.30 - 09.30\n\nProgweb \nB3 \n13.10 - 17.30";
                     } elseif ($nama_hari == "Thursday") {
                         # code...
-                        $jadwal_Matkul = "PBO \nC1 \n12.30 - 16.30\n\n Kalkulus \nB3 \n10.10 - 12.30";
+                        $jadwal_Matkul = "PBO \nC1 \n12.30 - 16.30\n\nKalkulus \nB3 \n10.10 - 12.30";
                     } elseif ($nama_hari == "Friday") {
                         # code...
                         $jadwal_Matkul = "kosong";
@@ -106,6 +106,24 @@ $app->post('/webhook', function ($request, $response) use ($bot, $pass_signature
                     }
 
                     $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($jadwal_Matkul);
+                    $result = $bot->replyMessage($event['replyToken'], $textMessageBuilder);
+                    return $result->getHTTPStatus() . ' ' . $result->getRawBody();
+                    break;
+                case '/info':
+                    # code...
+                    $sumber = "https://asengsaragih.000webhostapp.com/LineBotAndroid/readAll.php";
+                    $konten = file_get_contents($sumber);
+                    $dataInfo = json_decode($konten);
+                    $text_gabungan = "";
+                    for ($i=0; $i < count($dataInfo) ; $i++) { 
+                        $tanggal = $dataInfo[$i]['tanggal'];
+                        $keterangan = $dataInfo[$i]['keterangan'];
+                        $text_gabungan .= "{$tanggal}"." || "."{$keterangan}";
+                    }
+                    if ($text_gabungan == null) {
+                        $text_gabungan = "Kosong";
+                    }
+                    $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($text_gabungan);
                     $result = $bot->replyMessage($event['replyToken'], $textMessageBuilder);
                     return $result->getHTTPStatus() . ' ' . $result->getRawBody();
                     break;
