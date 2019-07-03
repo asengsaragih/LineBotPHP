@@ -151,15 +151,24 @@ $app->post('/webhook', function ($request, $response) use ($bot, $pass_signature
 $app->get('/pushmessage', function($req, $res) use ($bot)
 {
     // send push message to user
-    $userId = 'Udb1551f3893cade017d14653f2b186c3';
-
-    // $textMessageBuilder = new TextMessageBuilder('Halo, ini pesan push');
-    // $result = $bot->pushMessage($userId, $textMessageBuilder);
+?>
+    <form method="POST">
+        <input type="text" name="pesan" placeholder="Masukkan Pesan" required>
+        <br><br>
+        <input type="submit" name="submit">
+    </form>
+<?php
+    if (isset($_POST['submit'])) {
+        $isiPesan = $_POST['pesan'];
+        $userId = 'Udb1551f3893cade017d14653f2b186c3';
+        $textMessageBuilder = new TextMessageBuilder($isiPesan);
+        $result = $bot->pushMessage($userId, $textMessageBuilder);
+        return $res->withJson($result->getJSONDecodedBody(), $result->getHTTPStatus());
+    }
     
     //yang dibawah untuk push stiker
-    $stickerMessageBuilder = new StickerMessageBuilder(1, 106);
-    $bot->pushMessage($userId, $stickerMessageBuilder);
-    return $res->withJson($result->getJSONDecodedBody(), $result->getHTTPStatus());
+    // $stickerMessageBuilder = new StickerMessageBuilder(1, 106);
+    // $bot->pushMessage($userId, $stickerMessageBuilder);
 });
 
 $app->get('/multicast', function($req, $res) use ($bot)
