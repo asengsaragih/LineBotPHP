@@ -159,7 +159,7 @@ $app->get('/pushmessage', function($req, $res) use ($bot)
     </form>
 <?php
     if (isset($_GET['submit'])) {
-        $isiPesan = $_POST['pesan'];
+        $isiPesan = $_GET['pesan'];
         $userId = 'Udb1551f3893cade017d14653f2b186c3';
         $textMessageBuilder = new TextMessageBuilder($isiPesan);
         $result = $bot->pushMessage($userId, $textMessageBuilder);
