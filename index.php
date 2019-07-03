@@ -164,7 +164,7 @@ $app->get('/pushmessage', function($req, $res) use ($bot)
         $textMessageBuilder = new TextMessageBuilder($isiPesan);
         $result = $bot->pushMessage($userId, $textMessageBuilder);
         return $res->withJson($result->getJSONDecodedBody(), $result->getHTTPStatus());
-        header('Location: '.$_SERVER['REQUEST_URI']);
+        header('Location: index.php/pushmessage');
     }
     
     //yang dibawah untuk push stiker
