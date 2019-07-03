@@ -115,10 +115,10 @@ $app->post('/webhook', function ($request, $response) use ($bot, $pass_signature
                     $konten = file_get_contents($sumber);
                     $dataInfo = json_decode($konten, true);
                     $text_gabungan = "";
-                    for ($i=0; $i < count($dataInfo) ; $i++) { 
-                        $tanggal = $dataInfo[$i]['tanggal'];
-                        $keterangan = $dataInfo[$i]['keterangan'];
-                        $text_gabungan .= "{$tanggal}"." || "."{$keterangan}";
+                    foreach ($dataInfo as $d) { 
+                        $tanggal = $d['tanggal'];
+                        $keterangan = $d['keterangan'];
+                        $text_gabungan .= "{$tanggal}"." || "."{$keterangan}"."\n\n";
                     }
                     if ($text_gabungan == null) {
                         $text_gabungan = "Kosong";
