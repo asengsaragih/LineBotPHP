@@ -113,7 +113,7 @@ $app->post('/webhook', function ($request, $response) use ($bot, $pass_signature
                     # code...
                     $sumber = "https://asengsaragih.000webhostapp.com/LineBotAndroid/readAll.php";
                     $konten = file_get_contents($sumber);
-                    $dataInfo = json_decode($konten);
+                    $dataInfo = json_decode($konten, true);
                     $text_gabungan = "";
                     for ($i=0; $i < count($dataInfo) ; $i++) { 
                         $tanggal = $dataInfo[$i]['tanggal'];
