@@ -72,7 +72,7 @@ $app->post('/webhook', function (Request $request, Response $response) use ($bot
  
                         } elseif (strtolower($event['message']['text']) == 'flex message') {
  
-                            $flexTemplate = file_get_contents("menu.json"); // template flex message
+                            $flexTemplate = file_get_contents("flex_message.json"); // template flex message
                             $result = $httpClient->post(LINEBot::DEFAULT_ENDPOINT_BASE . '/v2/bot/message/reply', [
                                 'replyToken' => $event['replyToken'],
                                 'messages'   => [
@@ -90,7 +90,8 @@ $app->post('/webhook', function (Request $request, Response $response) use ($bot
                         }
  
                         return $response->withJson($result->getJSONDecodedBody(), $result->getHTTPStatus());
-                    } 
+                    }
+ 
                 }
             }
         }
