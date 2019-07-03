@@ -111,7 +111,7 @@ $app->post('/webhook', function ($request, $response) use ($bot, $pass_signature
                     break;
                 case '/info':
                     # code...
-                    $sumber = "https://asengsaragih.000webhostapp.com/LineBotAndroid/readAll.php";
+                    $sumber = "https://asengsaragih.000webhostapp.com/LineBotAndroid/readInfo.php";
                     $konten = file_get_contents($sumber);
                     $dataInfo = json_decode($konten, true);
                     $text_gabungan = "";
