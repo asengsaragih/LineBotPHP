@@ -63,8 +63,6 @@ $app->post('/webhook', function (Request $request, Response $response) use ($bot
                     $event['source']['type'] == 'room'
                 ) {
  
-                    ...
- 
                 // message from user
                 } else {
                     if ($event['message']['type'] == 'text') {
@@ -92,10 +90,7 @@ $app->post('/webhook', function (Request $request, Response $response) use ($bot
                         }
  
                         return $response->withJson($result->getJSONDecodedBody(), $result->getHTTPStatus());
-                    }
- 
-                    ...
- 
+                    } 
                 }
             }
         }
