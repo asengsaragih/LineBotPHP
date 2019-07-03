@@ -59,14 +59,6 @@ $app->post('/webhook', function ($request, $response) use ($bot, $pass_signature
         foreach ($data['events'] as $event) {
             $userMessage = strtolower($event['message']['text']);
 
-            if(strtolower($userMessage) == '/punten')
-            {
-            $message = "Mangga";
-            $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($message);
-            $result = $bot->replyMessage($event['replyToken'], $textMessageBuilder);
-            return $result->getHTTPStatus() . ' ' . $result->getRawBody();
-            }
-
             switch ($userMessage) {
                 case 'p':
                     # code...
@@ -76,6 +68,20 @@ $app->post('/webhook', function ($request, $response) use ($bot, $pass_signature
                     return $result->getHTTPStatus() . ' ' . $result->getRawBody();
                     break;
                 
+                case '/menu':
+                    # code...
+                    $flexTemplate = file_get_contents("menu.json"); // template flex message
+                    $result = $httpClient->post(LINEBot::DEFAULT_ENDPOINT_BASE . '/v2/bot/message/reply', [
+                        'replyToken' => $event['replyToken'],
+                        'messages'   => [
+                                    [
+                                'type'     => 'flex',
+                                'altText'  => 'Test Flex Message',
+                                'contents' => json_decode($flexTemplate)
+                            ]
+                        ],
+                    ]);
+                    break;
                 default:
                     break;
             }
