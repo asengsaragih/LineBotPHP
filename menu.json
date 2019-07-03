@@ -1,31 +1,57 @@
 {
-  "type": "template",
-  "altText": "this is a buttons template",
-  "template": {
-    "type": "buttons",
-    "actions": [
+  "type": "bubble",
+  "header": {
+    "type": "box",
+    "layout": "vertical",
+    "contents": [
       {
-        "type": "message",
-        "label": "Jadwal Kuliah",
-        "text": "/kuliah"
-      },
-      {
-        "type": "message",
-        "label": "Info Kuliah",
-        "text": "/info"
-      },
-      {
-        "type": "message",
-        "label": "Wali Dosen",
-        "text": "/waldos"
-      },
-      {
-        "type": "message",
-        "label": "Tentang BOT",
-        "text": "/tentang"
+        "type": "text",
+        "size": "3xl",
+        "text": "Daftar Menu"
       }
-    ],
-    "title": "Daftar Menu",
-    "text": "D3IF41-03"
+    ]
+  },
+  "body": {
+    "type": "box",
+    "layout": "vertical",
+    "spacing": "md",
+    "contents": [
+      {
+        "type": "button",
+        "style": "secondary",
+        "action": {
+          "type": "message",
+          "label": "Jadwal Kuliah",
+          "text": "/kuliah"
+        }
+      },
+      {
+        "type": "button",
+        "style": "secondary",
+        "action": {
+          "type": "message",
+          "label": "Info Kuliah",
+          "text": "/info"
+        }
+      },
+      {
+        "type": "button",
+        "style": "secondary",
+        "action": {
+          "type": "message",
+          "label": "Contact Wali Dosen",
+          "text": "/waldos"
+        }
+      },
+      {
+        "type": "button",
+        "style": "secondary",
+        "action": {
+          "type": "message",
+          "label": "Tentang Bot",
+          "text": "/tentang"
+        }
+      }
+    ]
   }
 }

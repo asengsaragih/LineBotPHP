@@ -77,7 +77,7 @@ $app->post('/webhook', function ($request, $response) use ($bot, $pass_signature
                                 'replyToken' => $event['replyToken'],
                                 'messages'   => [
                                     [
-                                        'type'     => 'template',
+                                        'type'     => 'flex',
                                         'altText'  => 'Test Flex Message',
                                         'contents' => json_decode($flexTemplate)
                                     ]
