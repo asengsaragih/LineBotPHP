@@ -152,13 +152,13 @@ $app->get('/pushmessage', function($req, $res) use ($bot)
 {
     // send push message to user
 ?>
-    <form method="POST">
+    <form method="GET">
         <input type="text" name="pesan" placeholder="Masukkan Pesan" required>
         <br><br>
         <input type="submit" name="submit">
     </form>
 <?php
-    if (isset($_POST['submit'])) {
+    if (isset($_GET['submit'])) {
         $isiPesan = $_POST['pesan'];
         $userId = 'Udb1551f3893cade017d14653f2b186c3';
         $textMessageBuilder = new TextMessageBuilder($isiPesan);
