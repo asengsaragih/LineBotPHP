@@ -116,8 +116,8 @@ $app->post('/webhook', function ($request, $response) use ($bot, $pass_signature
                     $dataInfo = json_decode($konten, true);
                     $text_gabungan = "";
                     foreach ($dataInfo as $d) { 
-                        $tanggal = $d['tanggal'];
-                        $keterangan = $d['keterangan'];
+                        $tanggal = $d['tanggal_pengumpulan'];
+                        $keterangan = $d['keterangan_tugas'];
                         $text_gabungan .= "{$tanggal}"." || "."{$keterangan}"."\n\n";
                     }
                     if ($text_gabungan == null) {
