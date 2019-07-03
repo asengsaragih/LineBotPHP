@@ -31,7 +31,7 @@ $app->get('/', function($req, $res)
 });
  
 // buat route untuk webhook
-$app->post('/webhook', function ($request, $response) use ($bot, $pass_signature, $httpClient)
+$app->post('/webhook', function (Request $request, Response $response) use ($bot, $httpClient)
 {
     // get request body and line signature header
     $body        = file_get_contents('php://input');
@@ -54,7 +54,7 @@ $app->post('/webhook', function ($request, $response) use ($bot, $pass_signature
     }
  
     // kode aplikasi nanti disini
-     $data = json_decode($body, true);
+    $data = json_decode($body, true);
     if (is_array($data['events'])) {
         foreach ($data['events'] as $event) {
             if ($event['type'] == 'message') {
