@@ -54,29 +54,54 @@ $app->post('/webhook', function ($request, $response) use ($bot, $pass_signature
     }
  
     // kode aplikasi nanti disini
-    $data = json_decode($body, true);
-    if(is_array($data['events'])){
-        foreach ($data['events'] as $event)
-        {
-            $userMessage = $event['message']['text'];
-
-            if(strtolower($userMessage) == '/menu') {
-                $flexTemplate = file_get_contents("menu.json"); // template flex message
-                $result = $httpClient->post(LINEBot::DEFAULT_ENDPOINT_BASE . '/v2/bot/message/reply', 
-                    [
-                        'replyToken' => $event['replyToken'],
-                        'messages'   => [
+     $data = json_decode($body, true);
+    if (is_array($data['events'])) {
+        foreach ($data['events'] as $event) {
+            if ($event['type'] == 'message') {
+                // message from group / room
+                if ($event['source']['type'] == 'group' or
+                    $event['source']['type'] == 'room'
+                ) {
+ 
+                    ...
+ 
+                // message from user
+                } else {
+                    if ($event['message']['type'] == 'text') {
+                        if (strtolower($event['message']['text']) == 'user id') {
+ 
+                            $result = $bot->replyText($event['replyToken'], $event['source']['userId']);
+ 
+                        } elseif (strtolower($event['message']['text']) == 'flex message') {
+ 
+                            $flexTemplate = file_get_contents("flex_message.json"); // template flex message
+                            $result = $httpClient->post(LINEBot::DEFAULT_ENDPOINT_BASE . '/v2/bot/message/reply', [
+                                'replyToken' => $event['replyToken'],
+                                'messages'   => [
                                     [
                                         'type'     => 'flex',
                                         'altText'  => 'Test Flex Message',
                                         'contents' => json_decode($flexTemplate)
                                     ]
                                 ],
-                ]);
-                return $response->withJson($result->getJSONDecodedBody(), $result->getHTTPStatus());
-            }  
-        } 
+                            ]);
+ 
+                        } else {
+                            // send same message as reply to user
+                            $result = $bot->replyText($event['replyToken'], $event['message']['text']);
+                        }
+ 
+                        return $response->withJson($result->getJSONDecodedBody(), $result->getHTTPStatus());
+                    }
+ 
+                    ...
+ 
+                }
+            }
+        }
     }
+ 
+    return $response->withStatus(400, 'No event sent!');
  
 });
 //push message atau broadcast message
