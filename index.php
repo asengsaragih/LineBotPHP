@@ -57,19 +57,17 @@ $app->post('/webhook', function ($request, $response) use ($bot, $pass_signature
     $data = json_decode($body, true);
     if (is_array($data['events'])) {
         foreach ($data['events'] as $event) {
+            date_default_timezone_set("Asia/Jakarta");
             $userMessage = strtolower($event['message']['text']);
 
             switch ($userMessage) {
                 case 'p':
-                    # code...
                     $message = "ateis";
                     $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($message);
                     $result = $bot->replyMessage($event['replyToken'], $textMessageBuilder);
                     return $result->getHTTPStatus() . ' ' . $result->getRawBody();
                     break;
-                
                 case '/menu':
-                    # code...
                     $flexTemplate = file_get_contents("menu.json"); // template flex message
                     $result = $httpClient->post(LINEBot::DEFAULT_ENDPOINT_BASE . '/v2/bot/message/reply', [
                         'replyToken' => $event['replyToken'],
@@ -81,6 +79,35 @@ $app->post('/webhook', function ($request, $response) use ($bot, $pass_signature
                             ]
                         ],
                     ]);
+                    break;
+                case '/kuliah':
+                    $nama_hari = date("l");
+                    $jadwal_Matkul = "";
+
+                    if ($nama_hari == "Monday") {
+                        $jadwal_Matkul = "Proyek Tingkat 2 \nD4 \n08.30 - 12.30\n\n KWU \nA3 \n13.10 - 15.30";
+                    } elseif ($nama_hari == "Tuesday") {
+                        # code...
+                        $jadwal_Matkul = "Multer \nC4 \n09.30 - 11.30\n\n Kalkulus \nB3 \n13.10 - 17.30";
+                    } elseif ($nama_hari == "Wednesday") {
+                        # code...
+                        $jadwal_Matkul = "Bhs Indonesia \nA5 \n07.30 - 09.30\n\n Progweb \nB3 \n13.10 - 17.30";
+                    } elseif ($nama_hari == "Thursday") {
+                        # code...
+                        $jadwal_Matkul = "PBO \nC1 \n12.30 - 16.30\n\n Kalkulus \nB3 \n10.10 - 12.30";
+                    } elseif ($nama_hari == "Friday") {
+                        # code...
+                        $jadwal_Matkul = "kosong";
+                    } elseif ($nama_hari == "Saturday") {
+                        # code...
+                        $jadwal_Matkul = "kosong";
+                    } else {
+                        $jadwal_Matkul = "Minggu ngga ada kuliah, selamat berlibur, jangan lupa TP";
+                    }
+
+                    $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($jadwal_Matkul);
+                    $result = $bot->replyMessage($event['replyToken'], $textMessageBuilder);
+                    return $result->getHTTPStatus() . ' ' . $result->getRawBody();
                     break;
                 default:
                     break;
