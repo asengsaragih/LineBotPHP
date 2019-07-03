@@ -57,7 +57,7 @@ $app->post('/webhook', function ($request, $response) use ($bot, $pass_signature
     $data = json_decode($body, true);
     if (is_array($data['events'])) {
         foreach ($data['events'] as $event) {
-            $userMessage = $event['message']['text'];
+            $userMessage = strtolower($event['message']['text']);
 
             if(strtolower($userMessage) == '/punten')
             {
@@ -65,6 +65,19 @@ $app->post('/webhook', function ($request, $response) use ($bot, $pass_signature
             $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($message);
             $result = $bot->replyMessage($event['replyToken'], $textMessageBuilder);
             return $result->getHTTPStatus() . ' ' . $result->getRawBody();
+            }
+
+            switch ($userMessage) {
+                case 'p':
+                    # code...
+                    $message = "ateis";
+                    $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($message);
+                    $result = $bot->replyMessage($event['replyToken'], $textMessageBuilder);
+                    return $result->getHTTPStatus() . ' ' . $result->getRawBody();
+                    break;
+                
+                default:
+                    break;
             }
 
         }
