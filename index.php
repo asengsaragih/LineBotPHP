@@ -61,12 +61,6 @@ $app->post('/webhook', function ($request, $response) use ($bot, $pass_signature
             $userMessage = strtolower($event['message']['text']);
 
             switch ($userMessage) {
-                case 'p':
-                    $message = "ateis";
-                    $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($message);
-                    $result = $bot->replyMessage($event['replyToken'], $textMessageBuilder);
-                    return $result->getHTTPStatus() . ' ' . $result->getRawBody();
-                    break;
                 case '/menu':
                     $flexTemplate = file_get_contents("menu.json"); // template flex message
                     $result = $httpClient->post(LINEBot::DEFAULT_ENDPOINT_BASE . '/v2/bot/message/reply', [
@@ -122,12 +116,24 @@ $app->post('/webhook', function ($request, $response) use ($bot, $pass_signature
                         $bulan = substr($tanggal,-4,-2);
                         $hari = substr($tanggal,6);  
                         $gabungan_tanggal = $hari."-".$bulan."-".$tahun;
-                        $text_gabungan .= "Info Kuliah / Tugas \n\n"."{$gabungan_tanggal}"." || "."{$keterangan}"."\n\n";
+                        $text_gabungan .= "{$gabungan_tanggal}"." || "."{$keterangan}"."\n\n";
                     }
                     if ($text_gabungan == null) {
                         $text_gabungan = "Kosong";
                     }
                     $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($text_gabungan);
+                    $result = $bot->replyMessage($event['replyToken'], $textMessageBuilder);
+                    return $result->getHTTPStatus() . ' ' . $result->getRawBody();
+                    break;
+                case '/tentang':
+                    $tentang = "-- TENTANG APLIKASI --\n\n"."Bot Line ini di buat oleh aldi. yang bertujuan, agar lock screen / wallpaper smartphone kalian ngga gambar jadwal perkuliahan lagi. jika kalian menemukan bug dalam bot ini maka segera hubungi Line : aldi_saragih \n\n"."Hatur Nuhun";
+                    $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($tentang);
+                    $result = $bot->replyMessage($event['replyToken'], $textMessageBuilder);
+                    return $result->getHTTPStatus() . ' ' . $result->getRawBody();
+                    break;
+                case '/waldos':
+                    $waldos = "--- INFO WALI DOSEN ---\n\n"."Nama : Indra Azimi, S.T., M.T.\n"."NIP : 14870060\n"."Telp : 081345679546";
+                    $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($waldos);
                     $result = $bot->replyMessage($event['replyToken'], $textMessageBuilder);
                     return $result->getHTTPStatus() . ' ' . $result->getRawBody();
                     break;
