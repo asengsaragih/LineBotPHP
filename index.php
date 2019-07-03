@@ -122,7 +122,7 @@ $app->post('/webhook', function ($request, $response) use ($bot, $pass_signature
                         $bulan = substr($tanggal,-4,-2);
                         $hari = substr($tanggal,6);  
                         $gabungan_tanggal = $hari."-".$bulan."-".$tahun;
-                        $text_gabungan .= "{$gabungan_tanggal}"." || "."{$keterangan}"."\n\n";
+                        $text_gabungan .= "Info Kuliah / Tugas \n\n"."{$gabungan_tanggal}"." || "."{$keterangan}"."\n\n";
                     }
                     if ($text_gabungan == null) {
                         $text_gabungan = "Kosong";
