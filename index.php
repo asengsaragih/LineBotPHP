@@ -137,6 +137,19 @@ $app->post('/webhook', function ($request, $response) use ($bot, $pass_signature
                     $result = $bot->replyMessage($event['replyToken'], $textMessageBuilder);
                     return $result->getHTTPStatus() . ' ' . $result->getRawBody();
                     break;
+                case 'punten':
+                    if ($event['source']['type'] == 'group' or $event['source']['type'] == 'room' ) {
+                        # code...
+                        $userId     = $event['source']['userId'];
+                        $getprofile = $bot->getProfile($userId);
+                        $profile    = $getprofile->getJSONDecodedBody();
+                        $greetings  = new TextMessageBuilder("Mangga, ".$profile['displayName']);
+                        $result = $bot->replyMessage($event['replyToken'], $greetings);
+                        return $res->withJson($result->getJSONDecodedBody(), $result->getHTTPStatus());
+                        break;
+                    } else {
+                        break;
+                    }
                 default:
                     $defaultWord = "Keyword yang kamu masukkan salah. Silahkan ketikan /menu untuk memulai";
                     $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($defaultWord);
