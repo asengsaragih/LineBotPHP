@@ -151,14 +151,15 @@ $app->post('/webhook', function ($request, $response) use ($bot, $pass_signature
                         break;
                     }
                 case '/cek':
-                    $pesan = "pesan";
-                        $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($pesan);
-                    
-                    for ($i=0; $i < 50 ; $i++) {
-                    $result = $bot->replyMessage($event['replyToken'], $textMessageBuilder);
-                        
-                    }
-                        return $result->getHTTPStatus() . ' ' . $result->getRawBody();
+                    $textMessageBuilder1 = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("pesan 1");
+                    $textMessageBuilder2 = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("pesan 2");
+
+                    $multiMessaegBuiler = new MultiMessageBuilder();
+                    $multiMessaegBuiler->add($textMessageBuilder1);
+                    $multiMessaegBuiler->add($textMessageBuilder2);
+
+                    $result = $bot->replyMessage($event['replyToken'], $multiMessaegBuiler);
+                    return $result->getHTTPStatus() . ' ' . $result->getRawBody();
 
                     break;
                     
