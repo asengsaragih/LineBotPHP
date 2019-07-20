@@ -157,8 +157,8 @@ $app->post('/webhook', function ($request, $response) use ($bot, $pass_signature
                         $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($pesan);
                         $result = $bot->replyMessage($event['replyToken'], $textMessageBuilder);
                         return $result->getHTTPStatus() . ' ' . $result->getRawBody();
-                        break;
                     }
+                    break;
                     
                 default:
                     $defaultWord = "Keyword yang kamu masukkan salah. Silahkan ketikan /menu untuk memulai";
