@@ -152,10 +152,14 @@ $app->post('/webhook', function ($request, $response) use ($bot, $pass_signature
                     }
                 case '/cek':
                     $pesan = "pesan";
-                    $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($pesan);
-                    $result = $bot->replyMessage($event['replyToken'], $textMessageBuilder);
-                    return $result->getHTTPStatus() . ' ' . $result->getRawBody();
-                    break;
+                    for ($i=0; $i < 50 ; $i++) { 
+                        # code...
+                        $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($pesan);
+                        $result = $bot->replyMessage($event['replyToken'], $textMessageBuilder);
+                        return $result->getHTTPStatus() . ' ' . $result->getRawBody();
+                        break;
+                    }
+                    
                 default:
                     $defaultWord = "Keyword yang kamu masukkan salah. Silahkan ketikan /menu untuk memulai";
                     $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($defaultWord);
