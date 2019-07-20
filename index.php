@@ -152,11 +152,12 @@ $app->post('/webhook', function ($request, $response) use ($bot, $pass_signature
                     }
                 case '/cek':
                     $pesan = "pesan";
-                    for ($i=0; $i < 50 ; $i++) {
                         $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($pesan);
+                    
+                    for ($i=0; $i < 50 ; $i++) {
+                    $result = $bot->replyMessage($event['replyToken'], $textMessageBuilder);
                         
                     }
-                    $result = $bot->replyMessage($event['replyToken'], $textMessageBuilder);
                         return $result->getHTTPStatus() . ' ' . $result->getRawBody();
 
                     break;
