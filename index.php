@@ -62,7 +62,7 @@ $app->post('/webhook', function ($request, $response) use ($bot, $pass_signature
             $idGrupKelas = "C0964f2cf09b447618a304da9c2219993";
             $cekGrup = $event['source']['groupId'];
             $idRoom = $event['source']['roomId'];
-            $idGroup = $event['source']['roomId'];
+            $idGroup = $event['source']['groupId'];
             $grup = $event['source']['type'] == 'group';
 
             $errorTextInfo = "Hanya Bisa Dilakukan Digrup Kelas D3IF41-03";
@@ -213,8 +213,8 @@ $app->post('/webhook', function ($request, $response) use ($bot, $pass_signature
                     break;
                 case '/leave':
                     if($event['source']['type'] == 'group') {
-                        $return = $bot->leaveGroup($idGroup);
-                        return $return->getHTTPStatus() . ' ' . $return->getRawBody();
+                        $response = $bot->leaveGroup($idGroup);
+                        return $response->getHTTPStatus() . ' ' . $response->getRawBody();
                         break;
                     } elseif ($event['source']['type'] == 'room') {
                         $return = $bot->leaveRoom($idRoom);
