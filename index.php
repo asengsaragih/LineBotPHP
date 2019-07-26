@@ -61,9 +61,12 @@ $app->post('/webhook', function ($request, $response) use ($bot, $pass_signature
             $userMessage = strtolower($event['message']['text']);
             $idGrupKelas = "C0964f2cf09b447618a304da9c2219993";
             $cekGrup = $event['source']['groupId'];
+            $idRoom = $event['source']['roomId'];
+            $idGroup = $event['source']['roomId'];
             $grup = $event['source']['type'] == 'group';
 
-            $errorText = "Hanya Bisa Dilakukan Digrup Kelas D3IF41-03";
+            $errorTextInfo = "Hanya Bisa Dilakukan Digrup Kelas D3IF41-03";
+            $errorText = "Tidak Bisa Menjalankan Perintah Ini";
 
             $userId     = $event['source']['userId'];
             $getprofile = $bot->getProfile($userId);
@@ -152,7 +155,7 @@ $app->post('/webhook', function ($request, $response) use ($bot, $pass_signature
                         return $result->getHTTPStatus() . ' ' . $result->getRawBody();
                         break;
                     } else {
-                        $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($errorText);
+                        $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($errorTextInfo);
                         $result = $bot->replyMessage($event['replyToken'], $textMessageBuilder);
                         return $result->getHTTPStatus() . ' ' . $result->getRawBody();
                         break;
@@ -208,6 +211,18 @@ $app->post('/webhook', function ($request, $response) use ($bot, $pass_signature
                     $result = $bot->replyMessage($event['replyToken'], $textMessageBuilder);
                     return $result->getHTTPStatus() . ' ' . $result->getRawBody();
                     break;
+                case '/leave':
+                    if($event['source']['type'] == 'group') {
+
+                    } elseif ($event['source']['type'] == 'room') {
+                        $return = $bot->leaveRoom($event['replyToken'], $idRoom);
+                        return $response->getHTTPStatus() . ' ' . $return->getRawBody();
+                    } else {
+                        $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($errorText);
+                        $result = $bot->replyMessage($event['replyToken'], $textMessageBuilder);
+                        return $result->getHTTPStatus() . ' ' . $result->getRawBody();
+                        break;
+                    }
                 default:
                     break;
             }
