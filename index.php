@@ -74,8 +74,8 @@ $app->post('/webhook', function ($request, $response) use ($bot, $pass_signature
                         ],
                     ]);
                     break;
-                case '/flex':
-                    $flexTemplate = file_get_contents("jadwal.json"); // template flex message
+                case '/jadwal':
+                    $flexTemplate = file_get_contents("jadwal_harian.json"); // template flex message
                     $result = $httpClient->post(LINEBot::DEFAULT_ENDPOINT_BASE . '/v2/bot/message/reply', [
                         'replyToken' => $event['replyToken'],
                         'messages'   => [
