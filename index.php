@@ -216,7 +216,8 @@ $app->post('/webhook', function ($request, $response) use ($bot, $pass_signature
 
                     } elseif ($event['source']['type'] == 'room') {
                         $return = $bot->leaveRoom($event['replyToken'], $idRoom);
-                        return $response->getHTTPStatus() . ' ' . $return->getRawBody();
+                        return $return->getHTTPStatus() . ' ' . $return->getRawBody();
+                        break;
                     } else {
                         $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($errorText);
                         $result = $bot->replyMessage($event['replyToken'], $textMessageBuilder);
