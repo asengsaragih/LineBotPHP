@@ -192,7 +192,7 @@ $app->post('/webhook', function ($request, $response) use ($bot, $pass_signature
                     # code...
                     break;
                 case '/cek2':
-                    $cek = $cekGrup." ".$displayName;
+                    $cek = $cekGrup." ".$namaPengirim;
                     $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($cek);
                     $result = $bot->replyMessage($event['replyToken'], $textMessageBuilder);
                     return $result->getHTTPStatus() . ' ' . $result->getRawBody();
