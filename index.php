@@ -191,7 +191,7 @@ $app->post('/webhook', function ($request, $response) use ($bot, $pass_signature
                 case '/SeluruhJadwal':
                     # code...
                     break;
-                case '/cek':
+                case '/cek2':
                     $cek = $cekGrup." ".$displayName;
                     $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($cek);
                     $result = $bot->replyMessage($event['replyToken'], $textMessageBuilder);
