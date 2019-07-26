@@ -59,9 +59,11 @@ $app->post('/webhook', function ($request, $response) use ($bot, $pass_signature
         foreach ($data['events'] as $event) {
             date_default_timezone_set("Asia/Jakarta");
             $userMessage = strtolower($event['message']['text']);
-            $idGrupKelas = "";
+            $idGrupKelas = "C0964f2cf09b447618a304da9c2219993";
             $cekGrup = $event['source']['groupId'];
             $grup = $event['source']['type'] == 'group';
+
+            $errorText = "Hanya Bisa Dilakukan Digrup Kelas D3IF41-03";
 
             $userId     = $event['source']['userId'];
             $getprofile = $bot->getProfile($userId);
@@ -127,26 +129,35 @@ $app->post('/webhook', function ($request, $response) use ($bot, $pass_signature
                     break;
                 case '/info':
                     # code...
-                    $sumber = "https://asengsaragih.000webhostapp.com/LineBotAndroid/readInfo.php";
-                    $konten = file_get_contents($sumber);
-                    $dataInfo = json_decode($konten, true);
-                    $text_gabungan = "";
-                    foreach ($dataInfo as $d) { 
-                        $tanggal = $d['tanggal_pengumpulan'];
-                        $keterangan = $d['keterangan_tugas'];
-                        $tahun = substr($tanggal,0,4);
-                        $bulan = substr($tanggal,-4,-2);
-                        $hari = substr($tanggal,6);  
-                        $gabungan_tanggal = $hari."-".$bulan."-".$tahun;
-                        $text_gabungan .= "{$gabungan_tanggal}"." || "."{$keterangan}"."\n\n";
+                    if ($cekGrup == $idGrupKelas) {
+                        # code...
+                        $sumber = "https://asengsaragih.000webhostapp.com/LineBotAndroid/readInfo.php";
+                        $konten = file_get_contents($sumber);
+                        $dataInfo = json_decode($konten, true);
+                        $text_gabungan = "";
+                        foreach ($dataInfo as $d) { 
+                            $tanggal = $d['tanggal_pengumpulan'];
+                            $keterangan = $d['keterangan_tugas'];
+                            $tahun = substr($tanggal,0,4);
+                            $bulan = substr($tanggal,-4,-2);
+                            $hari = substr($tanggal,6);  
+                            $gabungan_tanggal = $hari."-".$bulan."-".$tahun;
+                            $text_gabungan .= "{$gabungan_tanggal}"." || "."{$keterangan}"."\n\n";
+                        }
+                        if ($text_gabungan == null) {
+                            $text_gabungan = "Kosong";
+                        }
+                        $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($text_gabungan);
+                        $result = $bot->replyMessage($event['replyToken'], $textMessageBuilder);
+                        return $result->getHTTPStatus() . ' ' . $result->getRawBody();
+                        break;
+                    } else {
+                        $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($errorText);
+                        $result = $bot->replyMessage($event['replyToken'], $textMessageBuilder);
+                        return $result->getHTTPStatus() . ' ' . $result->getRawBody();
+                        break;
                     }
-                    if ($text_gabungan == null) {
-                        $text_gabungan = "Kosong";
-                    }
-                    $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($text_gabungan);
-                    $result = $bot->replyMessage($event['replyToken'], $textMessageBuilder);
-                    return $result->getHTTPStatus() . ' ' . $result->getRawBody();
-                    break;
+                    
                 case '/tentang':
                     $tentang = "-- TENTANG APLIKASI --\n\n"."Bot Line ini di buat oleh aldi. yang bertujuan, agar lock screen / wallpaper smartphone kalian ngga gambar jadwal perkuliahan lagi. jika kalian menemukan bug dalam bot ini maka segera hubungi Line : aldi_saragih \n\n"."Hatur Nuhun";
                     $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($tentang);
