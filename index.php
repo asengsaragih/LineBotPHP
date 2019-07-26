@@ -79,22 +79,22 @@ $app->post('/webhook', function ($request, $response) use ($bot, $pass_signature
                     $jadwal_Matkul = "";
 
                     if ($nama_hari == "Monday") {
-                        $jadwal_Matkul = "Proyek Tingkat 2 \nD4 \n08.30 - 12.30\n\n KWU \nA3 \n13.10 - 15.30";
+                        $jadwal_Matkul = "Mobpro Lanjut \nD4 \n08.30 - 10.30\n\n B.Indonesia \nA3 \n11.30 - 13.30";
                     } elseif ($nama_hari == "Tuesday") {
                         # code...
-                        $jadwal_Matkul = "Multer \nC4 \n09.30 - 11.30\n\nKalkulus \nB3 \n13.10 - 17.30";
+                        $jadwal_Matkul = "Kuliah Hari Ini Kosong";
                     } elseif ($nama_hari == "Wednesday") {
                         # code...
-                        $jadwal_Matkul = "Bhs Indonesia \nA5 \n07.30 - 09.30\n\nProgweb \nB3 \n13.10 - 17.30";
+                        $jadwal_Matkul = "Vvpl \nA5 \n06.30 - 11.30\n\nManajemen Proyek IT \nB3 \n12.30 - 16.30";
                     } elseif ($nama_hari == "Thursday") {
                         # code...
-                        $jadwal_Matkul = "PBO \nC1 \n12.30 - 16.30\n\nKalkulus \nB3 \n10.10 - 12.30";
+                        $jadwal_Matkul = "Mobpro Lanjut \nC1 \n08.30 - 12.30\n\nPBS \nB3 \n15.30 - 17.30";
                     } elseif ($nama_hari == "Friday") {
                         # code...
-                        $jadwal_Matkul = "kosong";
+                        $jadwal_Matkul = "Pengembangan Profesionalisme \nC1 \n09.30 - 11.30\n\nPBS \nB3 \n13.30 - 17.30";
                     } elseif ($nama_hari == "Saturday") {
                         # code...
-                        $jadwal_Matkul = "kosong";
+                        $jadwal_Matkul = "Kuliah Hari Ini Kosong";
                     } else {
                         $jadwal_Matkul = "Minggu ngga ada kuliah, selamat berlibur, jangan lupa TP";
                     }
