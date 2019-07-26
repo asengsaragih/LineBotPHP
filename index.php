@@ -213,9 +213,11 @@ $app->post('/webhook', function ($request, $response) use ($bot, $pass_signature
                     break;
                 case '/leave':
                     if($event['source']['type'] == 'group') {
-
+                        $return = $bot->leaveGroup($idGroup);
+                        return $return->getHTTPStatus() . ' ' . $return->getRawBody();
+                        break;
                     } elseif ($event['source']['type'] == 'room') {
-                        $return = $bot->leaveRoom($event['replyToken'], $idRoom);
+                        $return = $bot->leaveRoom($idRoom);
                         return $return->getHTTPStatus() . ' ' . $return->getRawBody();
                         break;
                     } else {
