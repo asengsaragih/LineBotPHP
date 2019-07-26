@@ -39,7 +39,7 @@
         "style": "secondary",
         "action": {
           "type": "message",
-          "label": "Contact Wali Dosen",
+          "label": "Contact Dosen",
           "text": "/waldos"
         }
       },

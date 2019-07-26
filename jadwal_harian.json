@@ -69,6 +69,15 @@
           "label": "Sabtu",
           "text": "/JadwalSabtu"
         }
+      },
+      {
+        "type": "button",
+        "style": "secondary",
+        "action": {
+          "type": "message",
+          "label": "Jadwal Full",
+          "text": "/SeluruhJadwal"
+        }
       }
     ]
   }

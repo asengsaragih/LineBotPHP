@@ -59,6 +59,15 @@ $app->post('/webhook', function ($request, $response) use ($bot, $pass_signature
         foreach ($data['events'] as $event) {
             date_default_timezone_set("Asia/Jakarta");
             $userMessage = strtolower($event['message']['text']);
+            $idGrupKelas = "";
+            $cekGrup = $event['source']['groupId'];
+            $grup = $event['source']['type'] == 'group';
+
+            $userId     = $event['source']['userId'];
+            $getprofile = $bot->getProfile($userId);
+            $profile    = $getprofile->getJSONDecodedBody();
+            $namaPengirim = $profile['displayName'];
+            $idPengirim = $profile['userId'];
 
             switch ($userMessage) {
                 case '/menu':
@@ -150,19 +159,6 @@ $app->post('/webhook', function ($request, $response) use ($bot, $pass_signature
                     $result = $bot->replyMessage($event['replyToken'], $textMessageBuilder);
                     return $result->getHTTPStatus() . ' ' . $result->getRawBody();
                     break;
-                case 'punten':
-                    if ($event['source']['type'] == 'group' or $event['source']['type'] == 'room' ) {
-                        # code...
-                        $userId     = $event['source']['userId'];
-                        $getprofile = $bot->getProfile($userId);
-                        $profile    = $getprofile->getJSONDecodedBody();
-                        $greetings  = new TextMessageBuilder("Mangga, ".$profile['displayName']." ".$profile['userId']);
-                        $result = $bot->replyMessage($event['replyToken'], $greetings);
-                        return $res->withJson($result->getJSONDecodedBody(), $result->getHTTPStatus());
-                        break;
-                    } else {
-                        break;
-                    }
                 case '/cek':
                     $textMessageBuilder1 = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("pesan 1");
                     $textMessageBuilder2 = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("pesan 2");
@@ -173,9 +169,34 @@ $app->post('/webhook', function ($request, $response) use ($bot, $pass_signature
 
                     $result = $bot->replyMessage($event['replyToken'], $multiMessaegBuiler);
                     return $result->getHTTPStatus() . ' ' . $result->getRawBody();
-
                     break;
-                    
+                case '/JadwalSenin':
+                    # code...
+                    break;
+                case '/JadwalSelasa':
+                    # code...
+                    break;
+                case '/JadwalRabu':
+                    # code...
+                    break;
+                case '/JadwalKamis':
+                    # code...
+                    break;
+                case '/JadwalJumat':
+                    # code...
+                    break;
+                case '/JadwalSabtu':
+                    # code...
+                    break;
+                case '/SeluruhJadwal':
+                    # code...
+                    break;
+                case '/cek':
+                    $cek = $cekGrup." ".$displayName;
+                    $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($cek);
+                    $result = $bot->replyMessage($event['replyToken'], $textMessageBuilder);
+                    return $result->getHTTPStatus() . ' ' . $result->getRawBody();
+                    break;
                 default:
                     break;
             }
