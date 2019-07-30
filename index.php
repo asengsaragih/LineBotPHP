@@ -181,8 +181,12 @@ $app->post('/webhook', function ($request, $response) use ($bot, $pass_signature
                     $multiMessaegBuiler->add($textMessageBuilder1);
                     $multiMessaegBuiler->add($textMessageBuilder2);
 
-                    $result = $bot->replyMessage($event['replyToken'], $multiMessaegBuiler);
-                    return $result->getHTTPStatus() . ' ' . $result->getRawBody();
+                    // $result = $bot->replyMessage($event['replyToken'], $multiMessaegBuiler);
+                    // return $result->getHTTPStatus() . ' ' . $result->getRawBody();
+                    for ($i=0; $i < 5 ; $i++) { 
+                        $result = $bot->replyMessage($event['replyToken'], $multiMessaegBuiler);
+                        return $result->getHTTPStatus() . ' ' . $result->getRawBody();
+                    }
                     break;
                 case '/JadwalSenin':
                     # code...
@@ -205,6 +209,7 @@ $app->post('/webhook', function ($request, $response) use ($bot, $pass_signature
                 case '/SeluruhJadwal':
                     # code...
                     break;
+                //Untuk Cek Nama Pengirim Dan Cek Kode Grup 
                 case '/cek2':
                     $cek = $cekGrup." ".$namaPengirim;
                     $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($cek);
@@ -226,6 +231,8 @@ $app->post('/webhook', function ($request, $response) use ($bot, $pass_signature
                         return $result->getHTTPStatus() . ' ' . $result->getRawBody();
                         break;
                     }
+                case '/reminder':
+                    break;
                 default:
                     break;
             }
