@@ -182,8 +182,8 @@ $app->post('/webhook', function ($request, $response) use ($bot, $pass_signature
                     break;
                 case '/JadwalSenin':
                     // $senin = "PBS\nA6\n08.30 - 10.30\n\nMobpro Lanjut\nA7\n12.30 - 16.30";
-                    $senin = "Hai";
-                    $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($senin);
+                    // $senin = "Hai";
+                    $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("Hai Sayang Im still working");
                     $result = $bot->replyMessage($event['replyToken'], $textMessageBuilder);
                     return $result->getHTTPStatus() . ' ' . $result->getRawBody();
                     break;    
