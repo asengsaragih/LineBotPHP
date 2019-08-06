@@ -79,7 +79,7 @@ $app->post('/webhook', function ($request, $response) use ($bot, $pass_signature
             $rabu = "Manajemen Proyek IT\nKU3.07.21\n12.30 - 14.30";
             $kamis = "Vvpl\nKU3.07.15\n06.30 - 11.30\n\nPBS\nA6\n12.30 - 16.30";
             $jumat = "Manajemen Proyek IT\nKU3.07.01\n09.30 - 11.30\n\nPengembangan Profesionalisme\nC2\n15.30 - 17.30";
-            $seluruh_jadwal = $senin."\n\n".$selasa."\n\n".$rabu."\n\n".$kamis."\n\n".$jumat;
+            $seluruh_jadwal = "<b>Senin</b>\n\n".$senin."\n\n".$selasa."\n\n".$rabu."\n\n".$kamis."\n\n".$jumat;
 
 
             switch ($userMessage) {
