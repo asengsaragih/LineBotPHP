@@ -40,7 +40,7 @@
         "action": {
           "type": "message",
           "label": "Contact Dosen",
-          "text": "/waldos"
+          "text": "/dosen"
         }
       },
       {
