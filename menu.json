@@ -21,7 +21,7 @@
         "style": "secondary",
         "action": {
           "type": "message",
-          "label": "Jadwal Kuliah",
+          "label": "Jadwal Kuliah Sekarang",
           "text": "/kuliah"
         }
       },
@@ -30,7 +30,16 @@
         "style": "secondary",
         "action": {
           "type": "message",
-          "label": "Info Kuliah",
+          "label": "Daftar Jadwal Kuliah",
+          "text": "/jadwal"
+        }
+      },
+      {
+        "type": "button",
+        "style": "secondary",
+        "action": {
+          "type": "message",
+          "label": "Info Perkuliah",
           "text": "/info"
         }
       },
