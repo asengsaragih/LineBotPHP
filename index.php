@@ -176,6 +176,56 @@ $app->post('/webhook', function ($request, $response) use ($bot, $pass_signature
                     return $result->getHTTPStatus() . ' ' . $result->getRawBody();
                     break;
                 case '/dosen':
+                    $flexTemplate = file_get_contents("dosen.json"); // template flex message
+                    $result = $httpClient->post(LINEBot::DEFAULT_ENDPOINT_BASE . '/v2/bot/message/reply', [
+                        'replyToken' => $event['replyToken'],
+                        'messages'   => [
+                                    [
+                                'type'     => 'flex',
+                                'altText'  => 'Test Flex Message',
+                                'contents' => json_decode($flexTemplate)
+                            ]
+                        ],
+                    ]);
+                    break;
+                case '/izm':
+                    $izm = "Indra Azimi, ST., MT.\n14870060\nindraazimi@tass.telkomuniversity.ac.id\n0813-4567-9546";
+                    $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($izm);
+                    $result = $bot->replyMessage($event['replyToken'], $textMessageBuilder);
+                    return $result->getHTTPStatus() . ' ' . $result->getRawBody();
+                    break;
+                case '/npr':
+                    $npr = "Fat’hah Noor Prawita, ST., MT.\n14840024\nfathah@tass.telkomuniversity.ac.id\n0812-2493-458";
+                    $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($npr);
+                    $result = $bot->replyMessage($event['replyToken'], $textMessageBuilder);
+                    return $result->getHTTPStatus() . ' ' . $result->getRawBody();
+                    break;
+                case '/htt':
+                    $htt = "Hetti Hidayati, S.Kom., MT.\n06750056\nhettihd@tass.telkomuniversity.ac.id\n0812-2172-2311";
+                    $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($htt);
+                    $result = $bot->replyMessage($event['replyToken'], $textMessageBuilder);
+                    return $result->getHTTPStatus() . ' ' . $result->getRawBody();
+                    break;
+                case '/mch':
+                    # code...
+                    $htt = "Maria Christina\n-\nmariachristinautel@gmail.com\n-";
+                    $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($htt);
+                    $result = $bot->replyMessage($event['replyToken'], $textMessageBuilder);
+                    return $result->getHTTPStatus() . ' ' . $result->getRawBody();
+                    break;
+                case '/auy':
+                    # code...
+                    $auy = "Agus Suryana\n-\n-\n-";
+                    $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($auy);
+                    $result = $bot->replyMessage($event['replyToken'], $textMessageBuilder);
+                    return $result->getHTTPStatus() . ' ' . $result->getRawBody();
+                    break;
+                case '/ast':
+                    # code...
+                    $ast = "-\n-\n-\n-";
+                    $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($ast);
+                    $result = $bot->replyMessage($event['replyToken'], $textMessageBuilder);
+                    return $result->getHTTPStatus() . ' ' . $result->getRawBody();
                     break;
                 case '/cek':
                     $textMessageBuilder1 = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("pesan 1");

@@ -1,0 +1,75 @@
+{
+  "type": "bubble",
+  "header": {
+    "type": "box",
+    "layout": "vertical",
+    "contents": [
+      {
+        "type": "text",
+        "size": "3xl",
+        "text": "Daftar Dosen"
+      }
+    ]
+  },
+  "body": {
+    "type": "box",
+    "layout": "vertical",
+    "spacing": "md",
+    "contents": [
+      {
+        "type": "button",
+        "style": "secondary",
+        "action": {
+          "type": "message",
+          "label": "Indra Azimi",
+          "text": "/izm"
+        }
+      },
+      {
+        "type": "button",
+        "style": "secondary",
+        "action": {
+          "type": "message",
+          "label": "Fat’hah Noor Prawita",
+          "text": "/npr"
+        }
+      },
+      {
+        "type": "button",
+        "style": "secondary",
+        "action": {
+          "type": "message",
+          "label": "Maria Christina",
+          "text": "/mch"
+        }
+      },
+      {
+        "type": "button",
+        "style": "secondary",
+        "action": {
+          "type": "message",
+          "label": "Hetti Hidayati",
+          "text": "/htt"
+        }
+      },
+      {
+        "type": "button",
+        "style": "secondary",
+        "action": {
+          "type": "message",
+          "label": "Agus Suryana",
+          "text": "/JadwalJumat"
+        }
+      },
+      {
+        "type": "button",
+        "style": "secondary",
+        "action": {
+          "type": "message",
+          "label": "AST",
+          "text": "/ast"
+        }
+      }
+    ]
+  }
+}
