@@ -183,39 +183,39 @@ $app->post('/webhook', function ($request, $response) use ($bot, $pass_signature
                 case '/JadwalSenin':
                     // $senin = "PBS\nA6\n08.30 - 10.30\n\nMobpro Lanjut\nA7\n12.30 - 16.30";
                     // $senin = "Hai";
-                    $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("Hai Sayang Im still working");
+                    $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($errorTextInfo);
                     $result = $bot->replyMessage($event['replyToken'], $textMessageBuilder);
                     return $result->getHTTPStatus() . ' ' . $result->getRawBody();
                     break;    
-                case '/JadwalSelasa':
-                    $selasa = "Bhs Indonesia\nKU3.02.13\n10.30 - 12.30\n\nMobpro Lanjut\nD4\n14.30 - 16.30";
-                    $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($selasa);
-                    $result = $bot->replyMessage($event['replyToken'], $textMessageBuilder);
-                    return $result->getHTTPStatus() . ' ' . $result->getRawBody();
-                    break;
-                case '/JadwalRabu':
-                    $rabu = "Manajemen Proyek IT\nKU3.07.21\n12.30 - 14.30";
-                    $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($rabu);
-                    $result = $bot->replyMessage($event['replyToken'], $textMessageBuilder);
-                    return $result->getHTTPStatus() . ' ' . $result->getRawBody();
-                    break;
-                case '/JadwalKamis':
-                    $kamis = "Vvpl\nKU3.07.15\n06.30 - 11.30\n\nPBS\nA6\n12.30 - 16.30";
-                    $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($kamis);
-                    $result = $bot->replyMessage($event['replyToken'], $textMessageBuilder);
-                    return $result->getHTTPStatus() . ' ' . $result->getRawBody();
-                    break;
-                case '/JadwalJumat':
-                    $jumat = "Manajemen Proyek IT\nKU3.07.01\n09.30 - 11.30\n\nPengembangan Profesionalisme\nC2\n15.30 - 17.30";
-                    $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($jumat);
-                    $result = $bot->replyMessage($event['replyToken'], $textMessageBuilder);
-                    return $result->getHTTPStatus() . ' ' . $result->getRawBody();
-                    break;
-                case '/SeluruhJadwal':
-                    $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($seluruh_jadwal);
-                    $result = $bot->replyMessage($event['replyToken'], $textMessageBuilder);
-                    return $result->getHTTPStatus() . ' ' . $result->getRawBody();
-                    break;
+                // case '/JadwalSelasa':
+                //     $selasa = "Bhs Indonesia\nKU3.02.13\n10.30 - 12.30\n\nMobpro Lanjut\nD4\n14.30 - 16.30";
+                //     $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($selasa);
+                //     $result = $bot->replyMessage($event['replyToken'], $textMessageBuilder);
+                //     return $result->getHTTPStatus() . ' ' . $result->getRawBody();
+                //     break;
+                // case '/JadwalRabu':
+                //     $rabu = "Manajemen Proyek IT\nKU3.07.21\n12.30 - 14.30";
+                //     $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($rabu);
+                //     $result = $bot->replyMessage($event['replyToken'], $textMessageBuilder);
+                //     return $result->getHTTPStatus() . ' ' . $result->getRawBody();
+                //     break;
+                // case '/JadwalKamis':
+                //     $kamis = "Vvpl\nKU3.07.15\n06.30 - 11.30\n\nPBS\nA6\n12.30 - 16.30";
+                //     $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($kamis);
+                //     $result = $bot->replyMessage($event['replyToken'], $textMessageBuilder);
+                //     return $result->getHTTPStatus() . ' ' . $result->getRawBody();
+                //     break;
+                // case '/JadwalJumat':
+                //     $jumat = "Manajemen Proyek IT\nKU3.07.01\n09.30 - 11.30\n\nPengembangan Profesionalisme\nC2\n15.30 - 17.30";
+                //     $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($jumat);
+                //     $result = $bot->replyMessage($event['replyToken'], $textMessageBuilder);
+                //     return $result->getHTTPStatus() . ' ' . $result->getRawBody();
+                //     break;
+                // case '/SeluruhJadwal':
+                //     $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($seluruh_jadwal);
+                //     $result = $bot->replyMessage($event['replyToken'], $textMessageBuilder);
+                //     return $result->getHTTPStatus() . ' ' . $result->getRawBody();
+                //     break;
                 //Untuk Cek Nama Pengirim Dan Cek Kode Grup 
                 case '/cek2':
                     $cek = $cekGrup." ".$namaPengirim;
